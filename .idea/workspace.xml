@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="65e4a791-dba5-429b-9471-1489afe27712" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1c292y9v6vOZxzUOpnsn5YJQcE9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LoviLave/site" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/testing/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/testing" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/testing/tests" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="65e4a791-dba5-429b-9471-1489afe27712" name="Default Changelist" comment="" />
+      <created>1589715617580</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589715617580</updated>
+      <workItem from="1589715621509" duration="3785000" />
+      <workItem from="1589719684633" duration="115000" />
+      <workItem from="1589719809870" duration="1886000" />
+      <workItem from="1589721777078" duration="268000" />
+      <workItem from="1589722046349" duration="9218000" />
+      <workItem from="1589786794097" duration="3151000" />
+      <workItem from="1589789983160" duration="21170000" />
+      <workItem from="1589874148325" duration="25242000" />
+      <workItem from="1589959341914" duration="5750000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/testing" />
+    </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="699" y="356" width="514" height="388" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589717825323">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="699" y="356" width="514" height="388" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1589717825323" />
+    <state x="693" y="302" width="526" height="496" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589715830217">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="693" y="302" width="526" height="496" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1589715830217" />
+    <state x="743" y="311" width="426" height="479" key="FileChooserDialogImpl" timestamp="1589723276333">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="743" y="311" width="426" height="479" key="FileChooserDialogImpl/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1589723276333" />
+    <state x="464" y="188" key="SettingsEditor" timestamp="1589787263146">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="464" y="188" key="SettingsEditor/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1589787263146" />
+    <state x="623" y="255" key="run.anything.popup" timestamp="1589788291547">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="623" y="255" key="run.anything.popup/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1589788291547" />
+  </component>
+</project>

@@ -1,0 +1,6 @@
+{
+  "extension": ["ts"],
+  "spec": "tests/**/*.spec.ts",
+  "require": [".mocharc.env","ts-node/register"],
+  "timeout": 60000
+}

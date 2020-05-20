@@ -1,0 +1,21 @@
+{
+  "scripts": {
+    "test": "mocha -r ts-node/register tests/test.spec.ts"
+  },
+  "devDependencies": {
+    "@types/faker": "^4.1.12",
+    "@types/mocha": "^7.0.2",
+    "@types/puppeteer": "^2.1.0",
+    "assert": "^2.0.0",
+    "faker": "^4.1.0",
+    "jsdom": "^16.0.1",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^7.0.1",
+    "puppeteer": "^3.0.4",
+    "ts-node": "^8.10.1"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "typescript": "^3.9.2"
+  }
+}
