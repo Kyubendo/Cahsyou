@@ -6,7 +6,7 @@ import * as faker from "faker/locale/uk"
 describe('', function(this: Suite)  {
 
   const numberFieldS = "#phone-number-field";
-  const phoneNumberS = faker.phone.phoneNumber();
+  const phoneNumberV = faker.phone.phoneNumber();
   const smsFieldS = "#sms-code-field";
   const smsFieldV = "999999";
   const smsFieldWrongV = "000000";
@@ -25,7 +25,6 @@ describe('', function(this: Suite)  {
   const emailV = "email@gmail.com";
   const innS = "#inn-field";
   const innV = Math.floor((Math.random() * (3732499999 - 1833100001) + 1833100001)).toString();
-
 
   const actualRegionSelectS = "#actual-region-select";
   const menuOptionS = "div.Select-option:nth-child";
@@ -91,6 +90,8 @@ describe('', function(this: Suite)  {
   const hasErrorClass = 'has-error';
   const changeCardBtnS = '#change-card-btn'
 
+  const registerUrl = 'http://localhost:3000/register';
+
   async function clearField(page: any){
     await page.keyboard.down('Control');
     await page.keyboard.down('KeyA');
@@ -124,11 +125,17 @@ describe('', function(this: Suite)  {
   }
 
 
+  // const it1 = function(title:string, id:string, fn:()=>void) {
+  //   console.log('********');
+  //   it(title + ' -- ' + id, fn)
+  //   console.log('*********')
+  // };
+
+
   it('phone number field -- id 1-2', async () =>  {
     await this.page.waitForSelector(numberFieldS);
     await this.page.focus(numberFieldS);
-    await this.page.keyboard.type(phoneNumberS, {delay: 120});
-
+    await this.page.keyboard.type(phoneNumberV, {delay: 120});
     await this.page.waitForSelector(smsFieldS);
   });
 
@@ -163,13 +170,11 @@ describe('', function(this: Suite)  {
 
     await selectValue(this.page, actualLocalityTypeSelectS, menuOptionS, 2);
     await typeInField(this.page, actualLocalityFieldS, actualLocalFieldV);
-
     await selectValue(this.page, actualStreetTypeSelectS, menuOptionS);
     await typeInField(this.page, actualStreetNameFieldS, actualStreetNameFieldV);
 
     await typeInField(this.page, actualHouseNumberS, actualHouseNumberV);
     await typeInField(this.page, actualApartmentFieldS, actualApartmentFieldV);
-
     await selectValue(this.page, actualTermSelectS, menuOptionS, 2);
     await click(this.page, coincidesBtnS);
   })
@@ -216,7 +221,6 @@ describe('', function(this: Suite)  {
   })
 
   it('change card -- id 35 problem', async () => {
-    await this.page.waitFor(3000);
     await click(this.page, changeCardBtnS, cardGroupS + "(1)")
     for (let i = 1; i < 5; i++){
       const cardSection = cardGroupS + "(" + i + ")";
@@ -258,10 +262,6 @@ describe('', function(this: Suite)  {
       await click(this.page, singBtnS);
     }
     try{await this.page.waitForNavigation({ waitUntil: 'networkidle0' })} catch (e) {}
-    await assert.strictEqual(this.page.url(), 'http://localhost:3000/register')
+    await assert.strictEqual(this.page.url(), registerUrl)
   })
-
-  // it('end', async () => {
-  //   await this.page.waitForSelector('s');
-  // })
 });
