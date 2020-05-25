@@ -1,13 +1,13 @@
 import * as puppeteer from "puppeteer";
 import * as mocha from "mocha";
-import {editTrace} from './editTrace'
+import {clearInputs, createFullVideo, editTrace} from './editTrace'
 
 
 export interface Suite extends mocha.Suite {
     page: puppeteer.Page;
     browser: puppeteer.Browser;
-    id: string;
 }
+
 export function describe(title: string, fn: (this: Suite) => void): mocha.Suite {
     return mocha.describe(title, function (this: Suite) {
         let testNumber=0;
@@ -21,6 +21,7 @@ export function describe(title: string, fn: (this: Suite) => void): mocha.Suite 
             this.page = (await this.browser.pages())[0] || await this.browser.newPage();
             await this.page.setViewport({height: 980, width: 1366});
             await this.page.goto('http://localhost:3000/', {waitUntil: 'networkidle2'});
+            await clearInputs();
         });
         beforeEach(async () =>{
             if (process.env.RECORD=="1") {
@@ -31,11 +32,22 @@ export function describe(title: string, fn: (this: Suite) => void): mocha.Suite 
             if (process.env.RECORD=="1") {
                 await this.page.tracing.stop();
                 await editTrace(testNumber);
+            }
+        })
+        afterEach( async function () {
+            if (process.env.RECORD=="1") {
+                if (this.currentTest!.state === 'failed') {
+                    console.log('Problem shown in video' + testNumber);
+                }
                 testNumber++;
             }
         })
+
         after(async () => {
             await this.browser.close();
+            if (process.env.RECORD=="1") {
+                await setTimeout(createFullVideo, 3000);
+            }
         });
         fn.call(this);
     } as any)

@@ -258,8 +258,10 @@ describe('', function(this: Suite)  {
   it('wrong sms code -- id 49 problem', async () => {
     await typeInField(this.page, smsFieldS, '000000');
     for (let i = 0; i < 10; i++) {
-      await this.page.waitFor(200);
-      await click(this.page, singBtnS);
+      try {
+        await this.page.waitFor(200);
+        await click(this.page, singBtnS);
+      } catch(e){}
     }
     try{await this.page.waitForNavigation({ waitUntil: 'networkidle0' })} catch (e) {}
     await assert.strictEqual(this.page.url(), registerUrl)

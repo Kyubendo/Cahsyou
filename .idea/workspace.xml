@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65e4a791-dba5-429b-9471-1489afe27712" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/bin/devtools-to-video" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/prettier.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/src/run.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/tests/editTrace.ts" beforeDir="false" afterPath="$PROJECT_DIR$/testing/tests/editTrace.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/tests/mocha-puppeteer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/testing/tests/mocha-puppeteer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/tests/test.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/testing/tests/test.spec.ts" afterDir="false" />
     </list>
@@ -65,7 +70,8 @@
       <workItem from="1589874148325" duration="25242000" />
       <workItem from="1589959341914" duration="26176000" />
       <workItem from="1590043981572" duration="24947000" />
-      <workItem from="1590131704542" duration="17220000" />
+      <workItem from="1590131704542" duration="18208000" />
+      <workItem from="1590389467391" duration="10664000" />
     </task>
     <servers />
   </component>

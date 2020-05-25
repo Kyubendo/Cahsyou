@@ -13,5 +13,14 @@ export async function editTrace(num: number) {
     exec(`rm ./videos/video${num}.mp4`);
     exec(`devtools-to-video --hideClock -i \'./traces/trace${num}S.json\' -o \'./videos/video${num}.mp4\'`);
     exec(`rm traces/trace${num-1}.json traces/trace${num-1}S.json`);
+
+    fs.writeFileSync(`./traces/input.txt`, `file ../videos/video${num}.mp4\n`, {flag:'a'});
 }
-'ffmpeg -f concat -i input.txt -vcodec copy -acodec copy full.mp4'
+export async function clearInputs() {
+    fs.writeFileSync(`./traces/input.txt`, '')
+}
+
+export async function createFullVideo() {
+    exec(`rm ./videos/full.mp4`);
+    exec('ffmpeg -f concat -safe 0 -i ./traces/input.txt -vcodec copy -acodec copy ./videos/full.mp4');
+}
