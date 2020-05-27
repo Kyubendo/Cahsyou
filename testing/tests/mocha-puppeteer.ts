@@ -14,12 +14,12 @@ export function describe(title: string, fn: (this: Suite) => void): mocha.Suite 
         before(async () => {
             this.browser = await puppeteer.launch({
                 slowMo: 10,
-                args: [`--window-size=1366,980`,
+                args: [`--window-size=1866,1035`,
                 ],
                 headless: process.env.OPEN !== "1",
             });
             this.page = (await this.browser.pages())[0] || await this.browser.newPage();
-            await this.page.setViewport({height: 980, width: 1366});
+            await this.page.setViewport({height: 1035, width: 1866});
             await this.page.goto('http://localhost:3000/', {waitUntil: 'networkidle2'});
             await clearInputs();
         });
