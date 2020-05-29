@@ -1,6 +1,7 @@
 import {describe, Suite} from "./mocha-puppeteer";
 import * as faker from "faker/locale/uk"
 import * as assert from "assert";
+import {Page}  from "puppeteer";
 
 
 describe('', function (this: Suite) {
@@ -103,7 +104,7 @@ describe('', function (this: Suite) {
     const inputPhotoWithPassportS = '#input-document-documentPhoto';
     const inputPhotoWithPassportP = './documents/withPassport.jpeg';
 
-
+    //let this.page: Page;
     const adminPhoneS = '[name="login"]';
     const adminPhoneV = '380000000000';
     const adminPasswordS = '[name="password"]';
@@ -119,11 +120,13 @@ describe('', function (this: Suite) {
 
     const crossS = '.ril__closeButton';
 
-    const confirmRequestBtnT = "Верифікувати заявку";
+    const verifyRequestBtnT = "Верифікувати заявку";
 
     const firstPagePhotoS = "Первая сторона ID-карты";
     const firstPagePhotoS1 = "Первая страница паспорта";
-
+    const confirmYesBtnT = 'Так';
+    const verifiedRequestBtnT = "Верифіковані";
+    const confirmRequestBtnT = "Підтвердити";
 
 
     async function clearField(page: any) {
@@ -135,19 +138,24 @@ describe('', function (this: Suite) {
     }
 
     const escapeXpathString = (str: any) => {
-      const splitedQuotes = str.replace(/'/g, `', "'", '`);
-      return `concat('${splitedQuotes}', '')`;
+        const splitedQuotes = str.replace(/'/g, `', "'", '`);
+        return `concat('${splitedQuotes}', '')`;
     };
 
     const clickByText = async (page: any, text: string, selector: string) => {
-      const escapedText = escapeXpathString(text);
-      const linkHandlers = await page.$x(`//${selector}[contains(text(), ${escapedText})]`);
-      if (linkHandlers.length > 0) {
-        await linkHandlers[0].click();
-      } else {
+        const escapedText = escapeXpathString(text);
+        let linkHandlers;
+        for (let i = 0; i < 10; i++) {
+            linkHandlers = await page.$x(`//${selector}[contains(text(), ${escapedText})]`, {visible: true});
+            if (linkHandlers.length > 0) {
+                await linkHandlers[0].click();
+                return;
+            }
+            await this.page.waitFor(300)
+        }
         throw new Error(`Not found: ${text}`);
-      }
     };
+
     async function typeInField(page: any, selector: string, value: string, click = true, confirmingSelector?: string) {
         await page.waitForSelector(selector);
         await page.focus(selector);
@@ -166,114 +174,118 @@ describe('', function (this: Suite) {
     }
 
     async function click(page: any, selector: string, confirmingSelector?: string) {
-        await page.waitForSelector(selector);
+        await page.waitForSelector(selector, {visible: true});
         await page.focus(selector);
         await page.click(selector);
         if (confirmingSelector) await page.waitForSelector(confirmingSelector);
     }
 
-    it('phone number field -- id 1-2', async () =>  {
-      await this.page.waitForSelector(numberFieldS);
-      await this.page.focus(numberFieldS);
-      await this.page.keyboard.type(phoneNumberV, {delay: 120});
-      await this.page.waitForSelector(smsFieldS);
+    it('phone number field -- id 1-2', async () => {
+        await this.page.waitForSelector(numberFieldS);
+        await this.page.focus(numberFieldS);
+        await this.page.keyboard.type(phoneNumberV, {delay: 120});
+        await this.page.waitForSelector(smsFieldS);
     });
 
     it.skip('sms field wrong code -- id 7 problem', async () => {
-      await typeInField(this.page, smsFieldS, smsFieldWrongV, false, hasErrorS);
-      await click(this.page, smsFieldS);
-      await clearField(this.page);
+        await typeInField(this.page, smsFieldS, smsFieldWrongV, false, hasErrorS);
+        await click(this.page, smsFieldS);
+        await clearField(this.page);
     })
 
     it('sms field -- id 5-6', async () => {
-      await typeInField(this.page, smsFieldS, smsFieldV, false, passwordS)
+        await typeInField(this.page, smsFieldS, smsFieldV, false, passwordS)
     })
 
     it('password field -- id 9, 12', async () => {
-      await typeInField(this.page, passwordS, passwordV);
-      await this.page.focus(savePasswordBtnS);
-      await this.page.click(savePasswordBtnS);
-      await this.page.waitForSelector(surnameS);
+        await typeInField(this.page, passwordS, passwordV);
+        await this.page.focus(savePasswordBtnS);
+        await this.page.click(savePasswordBtnS);
+        await this.page.waitForSelector(surnameS);
     })
 
     it('personal data block -- id 16', async () => {
-      await typeInField(this.page, surnameS, surnameV);
-      await typeInField(this.page, nameS, nameV);
-      await typeInField(this.page, patronymicS, patronymicV);
-      await typeInField(this.page, emailS, emailV);
-      await typeInField(this.page, innS, innV);
+        await typeInField(this.page, surnameS, surnameV);
+        await typeInField(this.page, nameS, nameV);
+        await typeInField(this.page, patronymicS, patronymicV);
+        await typeInField(this.page, emailS, emailV);
+        await typeInField(this.page, innS, innV);
     })
 
     it('address block -- id 18, 21, 23', async () => {
-      await selectValue(this.page, actualRegionSelectS, menuOptionS, 19);
-      await typeInField(this.page, addressS, addressV);
+        await selectValue(this.page, actualRegionSelectS, menuOptionS, 19);
+        await typeInField(this.page, addressS, addressV);
 
-      await selectValue(this.page, actualLocalityTypeSelectS, menuOptionS, 2);
-      await typeInField(this.page, actualLocalityFieldS, actualLocalFieldV);
-      await selectValue(this.page, actualStreetTypeSelectS, menuOptionS);
-      await typeInField(this.page, actualStreetNameFieldS, actualStreetNameFieldV);
+        await selectValue(this.page, actualLocalityTypeSelectS, menuOptionS, 2);
+        await typeInField(this.page, actualLocalityFieldS, actualLocalFieldV);
+        await selectValue(this.page, actualStreetTypeSelectS, menuOptionS);
+        await typeInField(this.page, actualStreetNameFieldS, actualStreetNameFieldV);
 
-      await typeInField(this.page, actualHouseNumberS, actualHouseNumberV);
-      await typeInField(this.page, actualApartmentFieldS, actualApartmentFieldV);
-      await selectValue(this.page, actualTermSelectS, menuOptionS, 2);
-      await click(this.page, coincidesBtnS);
+        await typeInField(this.page, actualHouseNumberS, actualHouseNumberV);
+        await typeInField(this.page, actualApartmentFieldS, actualApartmentFieldV);
+        await selectValue(this.page, actualTermSelectS, menuOptionS, 2);
+        await click(this.page, coincidesBtnS);
     })
 
-    it('house number field -- id 20 problem', async () => {
-      await this.page.$(actualHouseNumberS)
-          .then((el) => el!.getProperty("className"))
-          .then((cn) => cn.jsonValue())
-          .then((classNameString) => (classNameString as string).split(" "))
-          .then((x) => assert.strictEqual(x.includes(hasErrorClass),false));
+    it.skip('house number field -- id 20 problem', async () => {
+        await this.page.$(actualHouseNumberS)
+            .then((el) => el!.getProperty("className"))
+            .then((cn) => cn.jsonValue())
+            .then((classNameString) => (classNameString as string).split(" "))
+            .then((x) => assert.strictEqual(x.includes(hasErrorClass), false));
     })
 
     it('employment select -- id 24-25', async () => {
-      await selectValue(this.page, employmentSelectS, menuOptionS);
-      await selectValue(this.page, positionSelectS, menuOptionS);
-      await selectValue(this.page, activityTypeSelectS, menuOptionS);
-      await selectValue(this.page, workTermSelectS, menuOptionS);
-      await typeInField(this.page, employerNameFieldS, employerNameFieldV);
-      await typeInField(this.page, revenueFieldS, revenueFieldV);
+        await selectValue(this.page, employmentSelectS, menuOptionS);
+        await selectValue(this.page, positionSelectS, menuOptionS);
+        await selectValue(this.page, activityTypeSelectS, menuOptionS);
+        await selectValue(this.page, workTermSelectS, menuOptionS);
+        await typeInField(this.page, employerNameFieldS, employerNameFieldV);
+        await typeInField(this.page, revenueFieldS, revenueFieldV);
     })
 
-    it.skip('passport change -- id 26 problem', async () =>{
-      await click(this.page, passportBtnContainerS+'(2)');
-      await typeInField(this.page, pPassportIdNumberS, '1111', false);
-      await click(this.page, passportBtnContainerS+'(1)');
+    it.skip('passport change -- id 26 problem', async () => {
+        await click(this.page, passportBtnContainerS + '(2)');
+        await typeInField(this.page, pPassportIdNumberS, '1111', false);
+        await click(this.page, passportBtnContainerS + '(1)');
     })
 
     it('passport block -- id 30', async () => {
-      await typeInField(this.page, passportNumberFieldS, passportNumberFieldV);
-      await typeInField(this.page, passportIssueFieldS, passportIssueFieldV);
-      await typeInField(this.page, passportDateIssueFieldS, passportDateIssueFieldV);
+        await typeInField(this.page, passportNumberFieldS, passportNumberFieldV);
+        await typeInField(this.page, passportIssueFieldS, passportIssueFieldV);
+        await typeInField(this.page, passportDateIssueFieldS, passportDateIssueFieldV);
     })
 
-    it('contact person -- ', async () => {
-      await typeInField(this.page, contactNameFieldS, contactNameFieldV);
-      await typeInField(this.page, contactPhoneFieldS, contactPhoneFieldV);
+    it('contact person -- id 54-55', async () => {
+        await typeInField(this.page, contactNameFieldS, contactNameFieldV);
+        await typeInField(this.page, contactPhoneFieldS, contactPhoneFieldV);
     })
 
-    it('attach files -- ', async () => {
-      const passportPhotoInput = await this.page.$(inputDocumentFirstPassportPageS);
-      if (passportPhotoInput){
-        await passportPhotoInput.uploadFile(inputDocumentFirstPassportPageP);
-      }
-      const photoWithPassport = await this.page.$(inputPhotoWithPassportS);
-      if (photoWithPassport) {
-        await photoWithPassport.uploadFile(inputPhotoWithPassportP)
-      }
+    it('attach files -- id 56-57', async () => {
+        const passportPhotoInput = await this.page.$(inputDocumentFirstPassportPageS);
+        if (passportPhotoInput) {
+            await passportPhotoInput.uploadFile(inputDocumentFirstPassportPageP);
+        }
+        const photoWithPassport = await this.page.$(inputPhotoWithPassportS);
+        if (photoWithPassport) {
+            await photoWithPassport.uploadFile(inputPhotoWithPassportP)
+        }
     })
 
     it('sing up button -- id 31', async () => {
-      await click(this.page, nextFirstPageBtnS);
+        await click(this.page, nextFirstPageBtnS);
     })
 
-
-
-
+    it('go to admin page', async ()=>{
+        this.page = await this.browser.newPage();
+        await this.page.goto('https://bobra.v2.cashyou.ua/')
+        await this.page.setViewport({height: 768, width: 1366});
+    })
 
     it('admin login -- ', async () => {
-        await this.page.goto('https://bobra.v2.cashyou.ua/', {waitUntil: 'networkidle2'});
+        //await this.page.goto('https://bobra.v2.cashyou.ua/', {waitUntil: 'networkidle2'});
+
+
         await typeInField(this.page, adminPhoneS, adminPhoneV);
         await typeInField(this.page, adminPasswordS, adminPasswordV);
         await click(this.page, adminLoginBtnS);
@@ -283,39 +295,50 @@ describe('', function (this: Suite) {
 
     it('go to requests -- ', async () => {
         await this.page.waitForSelector('.fa');
-        await this.page.waitFor(1000);
-
         await clickByText(this.page, requestsT, 'span');
         await clickByText(this.page, newRequestsT, 'span');
     })
 
-    it('confirm photos', async () => {
+    it('confirm photos -- ', async () => {
         await click(this.page, showClientBtnS);
-        await this.page.waitForSelector('.file-box');
         await clickByText(this.page, photoWithPassportT, 'span');
-        await this.page.waitFor(1000);
-        await clickByText(this.page, confirmBtnT, 'button');
+        await clickByText(this.page, confirmBtnT, 'button'); //confirmBtnT  confirmBtnInMenuT
         await clickByText(this.page, confirmBtnInMenuT, 'a');
 
         await click(this.page, crossS);
-        await this.page.waitFor(20000);
-
         try {
-          await clickByText(this.page, firstPagePhotoS, 'span');
-        }catch (e) {
-          await clickByText(this.page, firstPagePhotoS1, 'span');
+            await clickByText(this.page, firstPagePhotoS, 'span');
+        } catch (e) {
+            await clickByText(this.page, firstPagePhotoS1, 'span');
         }
-        await this.page.waitFor(1000);
-        await clickByText(this.page, confirmBtnT, 'button');
+        await clickByText(this.page, confirmBtnT, 'button'); ///confirmBtnT
         await clickByText(this.page, confirmBtnInMenuT, 'a');
         await click(this.page, crossS);
     })
 
-    it('confirm request', async () => {
-      await clickByText(this.page, confirmRequestBtnT, 'button');
-      await this.page.waitFor(40000);
+    it('confirm request -- ', async () => {
+        await this.page.waitFor(500);
+        await clickByText(this.page, verifyRequestBtnT, 'button');
+    })
+    it('add comment -- ', async () => {
+        await this.page.keyboard.type('Комментарий');
+        await clickByText(this.page, confirmYesBtnT, 'button');
     })
 
+    it('go to verified requests', async () => {
+        await this.page.waitFor(500);
+        await clickByText(this.page, verifiedRequestBtnT, 'span');
+        await click(this.page, showClientBtnS);
+        await clickByText(this.page, confirmRequestBtnT, 'button');
+        await clickByText(this.page, confirmYesBtnT, 'button');
+    })
+
+    it('enter card number', async () => {
+        await this.page.bringToFront();
+        //await this.page.goto('https://v2.cashyou.ua/', {waitUntil: 'networkidle2'});
+        await this.page.waitFor(8000);
+    })
+})
 
     // it('card number page -- id 33', async () => {
     //   for (let i = 1; i < 5; i++){
@@ -371,4 +394,4 @@ describe('', function (this: Suite) {
     //   try{await this.page.waitForNavigation({ waitUntil: 'networkidle0' })} catch (e) {}
     //   await assert.strictEqual(this.page.url(), registerUrl)
     // })
-});
+//});

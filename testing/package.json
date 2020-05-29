@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "mocha -r ts-node/register tests/test.spec.ts"
+    "test": "mocha -b -r ts-node/register tests/test.spec.ts"
   },
   "devDependencies": {
     "@justinribeiro/devtools-to-video": "^0.2.1",
