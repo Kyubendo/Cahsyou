@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="65e4a791-dba5-429b-9471-1489afe27712" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/bin/devtools-to-video" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/prettier.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testing/node_modules/@justinribeiro/devtools-to-video/src/run.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/tests/editTrace.ts" beforeDir="false" afterPath="$PROJECT_DIR$/testing/tests/editTrace.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/tests/mocha-puppeteer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/testing/tests/mocha-puppeteer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/tests/test.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/testing/tests/test.spec.ts" afterDir="false" />
     </list>
@@ -21,6 +33,13 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,7 +57,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LoviLave/site" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../address-validate" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/testing/node_modules/typescript/lib" />
   </component>
@@ -71,12 +91,34 @@
       <workItem from="1589959341914" duration="26176000" />
       <workItem from="1590043981572" duration="24947000" />
       <workItem from="1590131704542" duration="18208000" />
-      <workItem from="1590389467391" duration="10664000" />
+      <workItem from="1590389467391" duration="12741000" />
+      <workItem from="1590478014521" duration="9761000" />
+      <workItem from="1590564382526" duration="1261000" />
+      <workItem from="1590569222684" duration="4474000" />
+      <workItem from="1590574699322" duration="13164000" />
+      <workItem from="1590648740578" duration="12610000" />
+      <workItem from="1590737158377" duration="7607000" />
+      <workItem from="1591002833192" duration="21256000" />
+      <workItem from="1591168887065" duration="2402000" />
+      <workItem from="1591191947207" duration="1204000" />
+      <workItem from="1591255186409" duration="5259000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -84,26 +126,28 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="699" y="356" width="514" height="388" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589717825323">
-      <screen x="0" y="25" width="1920" height="1055" />
+    <state x="2619" y="339" width="514" height="388" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590569267403">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="699" y="356" width="514" height="388" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1589717825323" />
+    <state x="2619" y="339" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1920.1055/1920.0.1920.1080@1920.0.1920.1080" timestamp="1590569267402" />
     <state x="693" y="302" width="526" height="496" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589715830217">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
     <state x="693" y="302" width="526" height="496" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1589715830217" />
-    <state x="743" y="311" width="426" height="479" key="FileChooserDialogImpl" timestamp="1589723276333">
+    <state x="743" y="311" width="426" height="479" key="FileChooserDialogImpl" timestamp="1591169168435">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="743" y="311" width="426" height="479" key="FileChooserDialogImpl/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1589723276333" />
+    <state x="743" y="311" width="426" height="479" key="FileChooserDialogImpl/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1591169168435" />
+    <state x="2663" y="293" key="FileChooserDialogImpl/0.25.1920.1055/1920.0.1920.1080@1920.0.1920.1080" timestamp="1590567597886" />
     <state x="464" y="188" key="SettingsEditor" timestamp="1589787263146">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
     <state x="464" y="188" key="SettingsEditor/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1589787263146" />
-    <state x="623" y="255" key="run.anything.popup" timestamp="1589788291547">
+    <state x="623" y="255" key="run.anything.popup" timestamp="1591261517900">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="623" y="255" key="run.anything.popup/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1589788291547" />
+    <state x="623" y="255" key="run.anything.popup/0.25.1920.1055/1920.0.1920.1080@0.25.1920.1055" timestamp="1591261517900" />
     <state x="623" y="201" width="672" height="676" key="search.everywhere.popup" timestamp="1590072775712">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>

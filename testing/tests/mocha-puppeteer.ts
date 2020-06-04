@@ -11,11 +11,11 @@ export interface Suite extends mocha.Suite {
 export function describe(title: string, fn: (this: Suite) => void): mocha.Suite {
     return mocha.describe(title, function (this: Suite) {
         let testNumber=0;
-        let switchPages=0;
         before(async () => {
             this.browser = await puppeteer.launch({
                 slowMo: 10,
                 args: [`--window-size=1366,768`,
+                    '--disable-features=site-per-process'
                 ],
                 headless: process.env.OPEN !== "1",
             });
@@ -24,20 +24,13 @@ export function describe(title: string, fn: (this: Suite) => void): mocha.Suite 
             await this.page.goto('http://localhost:3000/', {waitUntil: 'networkidle2'});
             await clearInputs();
         });
-        beforeEach(async function () {
-            if(this.currentTest!.title === 'go to admin page') {
-                switchPages = 1;
-                testNumber--;
-            }
-        })
-
         beforeEach(async () =>{
-            if ((process.env.RECORD=="1")&&!switchPages) {
+            if ((process.env.RECORD=="1")) {
                 await this.page.tracing.start({path:`./traces/trace${testNumber}.json`, screenshots:true});
             }
         })
         afterEach(async () => {
-            if ((process.env.RECORD=="1")&&!switchPages) {
+            if ((process.env.RECORD=="1")) {
                 await this.page.tracing.stop();
                 await editTrace(testNumber);
             }
@@ -49,7 +42,6 @@ export function describe(title: string, fn: (this: Suite) => void): mocha.Suite 
                 }
                 testNumber++;
             }
-            if(this.currentTest!.title==='go to admin page') switchPages = 0;
         })
 
         after(async () => {

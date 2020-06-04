@@ -1,7 +1,8 @@
 import {describe, Suite} from "./mocha-puppeteer";
 import * as faker from "faker/locale/uk"
 import * as assert from "assert";
-import {Page}  from "puppeteer";
+import {config} from "../config";
+import lookupFiles = Mocha.utils.lookupFiles;
 
 
 describe('', function (this: Suite) {
@@ -94,6 +95,7 @@ describe('', function (this: Suite) {
     const registerUrl = 'http://localhost:3000/register';
 
     const contactNameFieldS = '#contact-name-field';
+    const contactNameContainerS = '[data-name="contact_person_name"]';
     const contactNameFieldV = 'Вася';
 
     const contactPhoneFieldS = '#contact-phone-field';
@@ -127,7 +129,19 @@ describe('', function (this: Suite) {
     const confirmYesBtnT = 'Так';
     const verifiedRequestBtnT = "Верифіковані";
     const confirmRequestBtnT = "Підтвердити";
-
+    //const cardNumberS = "#cardNumber";
+    const cardNumberS = "#cardNumber";
+    const cardNumber2S = "#cardNumber2";
+    const cardNumber3S = "#cardNumber3";
+    const cardNumber4S = "#cardNumber4";
+    const cardExpirationMonthS = "#cardExpirationMonth";
+    const cardExpirationYearS = "#cardExpirationYear";
+    const cvvS = "#cvv";
+    const nextBtnCardS = "#button";
+// .NumGroup
+//     name="card_num1"
+//     if(this.value.length >= 4){document.getElementById('cardNumber2').focus();}
+//
 
     async function clearField(page: any) {
         await page.keyboard.down('Control');
@@ -158,7 +172,7 @@ describe('', function (this: Suite) {
 
     async function typeInField(page: any, selector: string, value: string, click = true, confirmingSelector?: string) {
         await page.waitForSelector(selector);
-        await page.focus(selector);
+        await page.$eval(selector, (el:any) => el.scrollIntoView({block:"center"}))
         if (click) await page.click(selector);
         await page.keyboard.type(value);
         if (confirmingSelector) await page.waitForSelector(confirmingSelector);
@@ -166,7 +180,7 @@ describe('', function (this: Suite) {
 
     async function selectValue(page: any, fieldSelector: string, menuSelector: string, option = 1) {
         await page.waitForSelector(fieldSelector);
-        await page.focus(fieldSelector);
+        await page.$eval(fieldSelector, (el:any) => el.scrollIntoView({block:"center"}))
         await page.click(fieldSelector);
         const menuOption = menuOptionS + "(" + option + ")";
         await page.waitForSelector(menuOption);
@@ -175,9 +189,17 @@ describe('', function (this: Suite) {
 
     async function click(page: any, selector: string, confirmingSelector?: string) {
         await page.waitForSelector(selector, {visible: true});
-        await page.focus(selector);
+        await page.$eval(selector, (el:any) => el.scrollIntoView({block:"center"}))
         await page.click(selector);
         if (confirmingSelector) await page.waitForSelector(confirmingSelector);
+    }
+
+    async function typeInFrame(frame: any, selector:string, text:string,confirmingSelector?: string){
+        await frame.waitForSelector(selector);
+        await frame.$eval(selector, (el:any) => el.scrollIntoView({block:"center"}))
+        const field = await frame.$(selector);
+        await field.type(text);
+        if (confirmingSelector) await frame.waitForSelector(confirmingSelector);
     }
 
     it('phone number field -- id 1-2', async () => {
@@ -255,6 +277,15 @@ describe('', function (this: Suite) {
         await typeInField(this.page, passportIssueFieldS, passportIssueFieldV);
         await typeInField(this.page, passportDateIssueFieldS, passportDateIssueFieldV);
     })
+    it.skip('contact person field -- id 54 problem', async () => {
+        await this.page.waitForSelector(contactNameContainerS);
+        await this.page.$eval(contactNameContainerS, (el) => el.scrollIntoView({block:"center"}))
+        await this.page.$(contactNameContainerS)
+            .then((el) => el!.getProperty("className"))
+            .then((cn) => cn.jsonValue())
+            .then((classNameString) => (classNameString as string).split(" "))
+            .then((x) => assert.strictEqual(x.includes(hasErrorClass), false));
+    })
 
     it('contact person -- id 54-55', async () => {
         await typeInField(this.page, contactNameFieldS, contactNameFieldV);
@@ -276,15 +307,8 @@ describe('', function (this: Suite) {
         await click(this.page, nextFirstPageBtnS);
     })
 
-    it('go to admin page', async ()=>{
-        this.page = await this.browser.newPage();
-        await this.page.goto('https://bobra.v2.cashyou.ua/')
-        await this.page.setViewport({height: 768, width: 1366});
-    })
-
     it('admin login -- ', async () => {
-        //await this.page.goto('https://bobra.v2.cashyou.ua/', {waitUntil: 'networkidle2'});
-
+        await this.page.goto('https://bobra.v2.cashyou.ua/');
 
         await typeInField(this.page, adminPhoneS, adminPhoneV);
         await typeInField(this.page, adminPasswordS, adminPasswordV);
@@ -328,17 +352,34 @@ describe('', function (this: Suite) {
     it('go to verified requests', async () => {
         await this.page.waitFor(500);
         await clickByText(this.page, verifiedRequestBtnT, 'span');
+        await this.page.waitFor(500);
         await click(this.page, showClientBtnS);
+        await this.page.waitFor(500);
         await clickByText(this.page, confirmRequestBtnT, 'button');
         await clickByText(this.page, confirmYesBtnT, 'button');
     })
 
     it('enter card number', async () => {
-        await this.page.bringToFront();
-        //await this.page.goto('https://v2.cashyou.ua/', {waitUntil: 'networkidle2'});
-        await this.page.waitFor(8000);
+        await this.page.goto('http://localhost:3000/');
+
+        await this.page.waitForSelector("iframe");
+        const elementHandle = await this.page.$('iframe[name="verifyCard"]');
+        const f = await elementHandle!.contentFrame();
+        const frame = f!;
+        await typeInFrame(frame, cardNumberS, config.card.number);
+        await typeInFrame(frame, cardNumber2S, config.card.number2);
+        await typeInFrame(frame, cardNumber3S, config.card.number3);
+        await typeInFrame(frame, cardNumber4S, config.card.number4);
+        await frame.click(cardExpirationMonthS);
+        await frame.select(cardExpirationMonthS, config.card.expirationMonth)
+        await frame.select(cardExpirationYearS, config.card.expirationYear)
+
+        await typeInFrame(frame, cvvS, config.card.cvv);
+
+
+        await this.page.waitFor(10000);
     })
-})
+
 
     // it('card number page -- id 33', async () => {
     //   for (let i = 1; i < 5; i++){
@@ -394,4 +435,4 @@ describe('', function (this: Suite) {
     //   try{await this.page.waitForNavigation({ waitUntil: 'networkidle0' })} catch (e) {}
     //   await assert.strictEqual(this.page.url(), registerUrl)
     // })
-//});
+});
